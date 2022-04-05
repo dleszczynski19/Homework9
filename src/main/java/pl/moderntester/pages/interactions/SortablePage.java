@@ -39,9 +39,7 @@ public class SortablePage extends BasePage {
         WebElement dest = sortableList.get(destIndex);
         action.click(target).clickAndHold()
                 .moveToElement(dest)
-                .moveByOffset(0, 10)
                 .release()
-                .build()
                 .perform();
         return this;
     }
