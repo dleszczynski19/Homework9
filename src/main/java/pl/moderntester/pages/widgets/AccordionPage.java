@@ -30,6 +30,7 @@ public class AccordionPage extends BasePage {
         public String getSectionCss() {
             return sectionCss;
         }
+
         public String getTextCss() {
             return textCss;
         }

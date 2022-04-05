@@ -1,39 +1,56 @@
 package pl.moderntester.pages.basic;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pl.moderntester.pages.BasePage;
 
 import java.time.Duration;
 
-public class AlertsPage {
-    private WebDriver driver;
+public class AlertsPage extends BasePage {
     private static Logger log = LoggerFactory.getLogger(AlertsPage.class);
-    private String simpleAlertButton = "#simple-alert";
-    private String promptPopupButton = "#prompt-alert";
-    private String confirmPopupButton = "#confirm-alert";
-    private String delayedPopupButton = "#delayed-alert";
-    private String simpleAlertLabel = "#simple-alert-label";
-    private String promptAlertLabel = "#prompt-label";
-    private String confirmAlertLabel = "#confirm-label";
-    private String delayedAlertLabel = "#delayed-alert-label";
+
+    @FindBy(css = "#simple-alert")
+    private WebElement simpleAlertButton;
+
+    @FindBy(css = "#prompt-alert")
+    private WebElement promptPopupButton;
+
+    @FindBy(css = "#confirm-alert")
+    private WebElement confirmPopupButton;
+
+    @FindBy(css = "#delayed-alert")
+    private WebElement delayedPopupButton;
+
+    @FindBy(css = "#simple-alert-label")
+    private WebElement simpleAlertLabel;
+
+    @FindBy(css = "#prompt-label")
+    private WebElement promptAlertLabel;
+
+    @FindBy(css = "#confirm-label")
+    private WebElement confirmAlertLabel;
+
+    @FindBy(css = "#delayed-alert-label")
+    private WebElement delayedAlertLabel;
 
     public AlertsPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public AlertsPage handleSimpleAlert() {
-        driver.findElement(By.cssSelector(simpleAlertButton)).click();
+        simpleAlertButton.click();
         driver.switchTo().alert().accept();
         log.info("Simple alert handled");
         return this;
     }
 
     public AlertsPage handlePromptPopup(String value) {
-        driver.findElement(By.cssSelector(promptPopupButton)).click();
+        promptPopupButton.click();
         driver.switchTo().alert().sendKeys(value);
         driver.switchTo().alert().accept();
         log.info("Prompt popup handled");
@@ -41,14 +58,14 @@ public class AlertsPage {
     }
 
     public AlertsPage handleAcceptConfirmPopup() {
-        driver.findElement(By.cssSelector(confirmPopupButton)).click();
+        confirmPopupButton.click();
         driver.switchTo().alert().accept();
         log.info("Accept confirm alert handled");
         return this;
     }
 
     public AlertsPage handleCancelConfirmPopup() {
-        driver.findElement(By.cssSelector(confirmPopupButton)).click();
+        confirmPopupButton.click();
         driver.switchTo().alert().dismiss();
         log.info("Dismiss confirm alert handled");
         return this;
@@ -56,7 +73,7 @@ public class AlertsPage {
 
     public AlertsPage handleDelayedAlert() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        driver.findElement(By.cssSelector(delayedPopupButton)).click();
+        delayedPopupButton.click();
         wait.until(ExpectedConditions.alertIsPresent());
         driver.switchTo().alert().accept();
         log.info("Delayed alert handled");
@@ -64,18 +81,18 @@ public class AlertsPage {
     }
 
     public String getAlertLabel() {
-        return driver.findElement(By.cssSelector(simpleAlertLabel)).getText();
+        return simpleAlertLabel.getText();
     }
 
     public String getPromptLabel() {
-        return driver.findElement(By.cssSelector(promptAlertLabel)).getText();
+        return promptAlertLabel.getText();
     }
 
     public String getConfirmLabel() {
-        return driver.findElement(By.cssSelector(confirmAlertLabel)).getText();
+        return confirmAlertLabel.getText();
     }
 
     public String getDelayedLabel() {
-        return driver.findElement(By.cssSelector(delayedAlertLabel)).getText();
+        return delayedAlertLabel.getText();
     }
 }

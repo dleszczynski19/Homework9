@@ -18,7 +18,7 @@ public class AutocompleteTest extends TestBase {
 
     @Test
     @DisplayName("Autocomplete Test")
-    public void shouldManageAutocomplete(){
+    public void shouldManageAutocomplete() {
         AutocompletePage autocompletePage = new AutocompletePage(driver);
 
         driver.get("https://seleniumui.moderntester.pl/autocomplete.php");

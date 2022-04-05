@@ -2,13 +2,16 @@ package pl.moderntester.pages.interactions;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.moderntester.pages.BasePage;
 
 public class DraggablePage extends BasePage {
     private static Logger log = LoggerFactory.getLogger(DraggablePage.class);
-    private String draggableElement = "#draggable";
+
+    @FindBy(css = "#draggable")
+    private WebElement draggableElement;
 
     public DraggablePage(WebDriver driver) {
         super(driver);
@@ -20,11 +23,10 @@ public class DraggablePage extends BasePage {
 
     public DraggablePage dragElementTo(Position position) {
         Point destinationPoint = getPositionToDrag(position);
-        WebElement elementToDrag = driver.findElement(By.cssSelector(draggableElement));
-        int xOffset = destinationPoint.getX() - elementToDrag.getLocation().getX();
-        int yOffset = destinationPoint.getY() - elementToDrag.getLocation().getY();
+        int xOffset = destinationPoint.getX() - draggableElement.getLocation().getX();
+        int yOffset = destinationPoint.getY() - draggableElement.getLocation().getY();
         Actions actions = new Actions(driver);
-        actions.dragAndDropBy(elementToDrag, xOffset, yOffset)
+        actions.dragAndDropBy(draggableElement, xOffset, yOffset)
                 .perform();
         log.info("Element dragged to " + position);
         return this;
@@ -38,10 +40,10 @@ public class DraggablePage extends BasePage {
     }
 
     private Dimension getElementSize() {
-        int height = Integer.parseInt(driver.findElement(By.cssSelector(draggableElement))
-                .getCssValue("height").replace("px", ""));
-        int width = Integer.parseInt(driver.findElement(By.cssSelector(draggableElement))
-                .getCssValue("width").replace("px", ""));
+        int height = Integer.parseInt(draggableElement.getCssValue("height")
+                .replace("px", ""));
+        int width = Integer.parseInt(draggableElement.getCssValue("width")
+                .replace("px", ""));
         return new Dimension(width, height);
     }
 

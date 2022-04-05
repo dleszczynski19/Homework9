@@ -3,18 +3,26 @@ package pl.moderntester.pages.interactions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.moderntester.pages.BasePage;
 
 public class SelectablePage extends BasePage {
     private static Logger log = LoggerFactory.getLogger(SelectablePage.class);
-    private String itemListOl = "#selectable li";
-    private String selectedItem = ".ui-widget-content.ui-selectee.ui-selected";
-    private String itemXpath;
-    private String feedbackLabel = "#feedback";
 
+    @FindBy(css = "#selectable li")
+    private WebElement itemListOl;
+
+    @FindBy(css = ".ui-widget-content.ui-selectee.ui-selected")
+    private WebElement selectedItem;
+
+    @FindBy(css = "#feedback")
+    private WebElement feedbackLabel;
+
+    private String itemXpath;
 
     public SelectablePage(WebDriver driver) {
         super(driver);
@@ -32,6 +40,6 @@ public class SelectablePage extends BasePage {
     }
 
     public String getFeedback() {
-        return driver.findElement(By.cssSelector(feedbackLabel)).getText();
+        return feedbackLabel.getText();
     }
 }

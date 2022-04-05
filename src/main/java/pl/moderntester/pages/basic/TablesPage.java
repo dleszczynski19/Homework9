@@ -3,6 +3,7 @@ package pl.moderntester.pages.basic;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.moderntester.basic.models.Mountain;
@@ -14,9 +15,11 @@ import java.util.stream.Collectors;
 
 public class TablesPage extends BasePage {
     private static Logger log = LoggerFactory.getLogger(TablesPage.class);
-    private String tableCss = "tbody tr";
     private final List<Mountain> listMountain = new ArrayList<>();
     private List<Mountain> filteredList = new ArrayList<>();
+
+    @FindBy(css = "tbody tr")
+    private List<WebElement> tableCss;
 
     public TablesPage(WebDriver driver) {
         super(driver);
@@ -30,8 +33,7 @@ public class TablesPage extends BasePage {
     }
 
     public TablesPage setTableList() {
-        List<WebElement> tableList = driver.findElements(By.cssSelector(tableCss));
-        for (WebElement webElement : tableList) {
+        for (WebElement webElement : tableCss) {
             listMountain.add(addMountain(webElement));
         }
         log.info("Table list set");

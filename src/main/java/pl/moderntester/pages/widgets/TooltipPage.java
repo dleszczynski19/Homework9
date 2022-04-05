@@ -1,25 +1,24 @@
 package pl.moderntester.pages.widgets;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import pl.moderntester.pages.BasePage;
 
-import java.time.Duration;
-
 public class TooltipPage extends BasePage {
-    private String inputAge = "#age";
-    private String tooltipText = ".ui-tooltip-content";
+
+    @FindBy(css = "#age")
+    private WebElement inputAge;
+
+    @FindBy(css = ".ui-tooltip-content")
+    private WebElement tooltipText;
 
     public TooltipPage(WebDriver driver) {
         super(driver);
     }
 
     public String getTooltipLabel() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        driver.findElement(By.cssSelector(inputAge)).click();
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector(tooltipText))));
-        return driver.findElement(By.cssSelector(tooltipText)).getText();
+        inputAge.click();
+        return tooltipText.getText();
     }
 }

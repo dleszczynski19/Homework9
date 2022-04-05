@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.moderntester.pages.BasePage;
@@ -14,8 +15,9 @@ import java.util.Random;
 
 public class SortablePage extends BasePage {
     private static Logger log = LoggerFactory.getLogger(SortablePage.class);
-    private String sortableLi = "#sortable li";
-    List<WebElement> sortableList;
+
+    @FindBy(css = "#sortable li")
+    private List<WebElement> sortableList;
 
     private int[] numberArray = new int[]{1, 2, 3, 4, 5, 6, 7};
 
@@ -33,7 +35,6 @@ public class SortablePage extends BasePage {
 
     public SortablePage moveItem(int targetIndex, int destIndex) {
         Actions action = new Actions(driver);
-        sortableList = driver.findElements(By.cssSelector(sortableLi));
         WebElement target = driver.findElement(By.xpath("//li[text()=\"Item " + targetIndex + "\"]"));
         WebElement dest = sortableList.get(destIndex);
         action.click(target).clickAndHold()

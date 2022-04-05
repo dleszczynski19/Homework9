@@ -3,26 +3,28 @@ package pl.moderntester.pages.widgets;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pl.moderntester.pages.BasePage;
 
 import java.time.Duration;
 import java.util.List;
 
-public class MenuPage {
-    private WebDriver driver;
+public class MenuPage extends BasePage {
     private static Logger log = LoggerFactory.getLogger(MenuPage.class);
-    private String optionsList = ".ui-menu-item:not(.ui-state-disabled)";
+
+    @FindBy(css = ".ui-menu-item:not(.ui-state-disabled)")
+    private List<WebElement> optionsList;
 
     public MenuPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public MenuPage selectOption(String optionName, boolean isWaitNeeded) {
-        List<WebElement> options = driver.findElements(By.cssSelector(optionsList));
-        WebElement option = options.stream().filter(opt -> opt.getText().equals(optionName))
+        WebElement option = optionsList.stream().filter(opt -> opt.getText().equals(optionName))
                 .reduce((f, s) -> s)
                 .orElseThrow(() -> new RuntimeException("Can't find option"));
         option.click();

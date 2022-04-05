@@ -2,10 +2,13 @@ package pl.moderntester.pages.widgets;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pl.moderntester.pages.BasePage;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,27 +19,37 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 
-public class DatePickerPage {
-    private WebDriver driver;
+public class DatePickerPage extends BasePage {
     private WebDriverWait wait;
     private static Logger log = LoggerFactory.getLogger(DatePickerPage.class);
-    private String datePickerInput = "#datepicker";
-    private String datePickerMonth = ".ui-datepicker-month";
-    private String datePickerYear = ".ui-datepicker-year";
-    private String nextButton = ".ui-datepicker-next";
-    private String previousButton = ".ui-datepicker-prev";
+
+    @FindBy(css = "#datepicker")
+    private WebElement datePickerInput;
+
+    @FindBy(css = ".ui-datepicker-month")
+    private WebElement datePickerMonth;
+
+    @FindBy(css = ".ui-datepicker-year")
+    private WebElement datePickerYear;
+
+    @FindBy(css = ".ui-datepicker-next")
+    private WebElement nextButton;
+
+    @FindBy(css = ".ui-datepicker-prev")
+    private WebElement previousButton;
+
     private LocalDate currentDate;
     private int destinationDay;
     private int destinationMonth;
     private int destinationYear;
 
     public DatePickerPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     public DatePickerPage clickDateInput() {
-        driver.findElement(By.cssSelector(datePickerInput)).click();
+        datePickerInput.click();
         return this;
     }
 
@@ -92,7 +105,7 @@ public class DatePickerPage {
     }
 
     private DatePickerPage selectMonth(int destinationMonth) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(datePickerMonth)));
+        wait.until(ExpectedConditions.visibilityOf(datePickerMonth));
         int currentMonth = getCurrentMonth();
         if (currentMonth > destinationMonth) setPrevMonth(destinationMonth);
         else if (currentMonth < destinationMonth) setNextMonth(destinationMonth);
@@ -101,14 +114,14 @@ public class DatePickerPage {
     }
 
     private DatePickerPage selectDay(int destinationDay) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(datePickerMonth)));
+        wait.until(ExpectedConditions.visibilityOf(datePickerMonth));
         driver.findElement(By.xpath("//a [text()=\"" + destinationDay + "\"]")).click();
         this.destinationDay = destinationDay;
         return this;
     }
 
     private DatePickerPage selectYear(int destinationYear) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(datePickerYear)));
+        wait.until(ExpectedConditions.visibilityOf(datePickerYear));
         int currentYear = getInputYear();
         if (currentYear > destinationYear) setPrevYear(destinationYear);
         else if (currentYear < destinationYear) setNextYear(destinationYear);
@@ -124,7 +137,7 @@ public class DatePickerPage {
     private int getCurrentMonth() {
         Date date = null;
         try {
-            date = new SimpleDateFormat("MMMM", Locale.ENGLISH).parse(driver.findElement(By.cssSelector(datePickerMonth)).getText());
+            date = new SimpleDateFormat("MMMM", Locale.ENGLISH).parse(datePickerMonth.getText());
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -143,25 +156,25 @@ public class DatePickerPage {
 
     private void setPrevMonth(int destMonth) {
         while (getCurrentMonth() != destMonth) {
-            driver.findElement(By.cssSelector(previousButton)).click();
+            previousButton.click();
         }
     }
 
     private void setNextMonth(int destMonth) {
         while (getCurrentMonth() != destMonth) {
-            driver.findElement(By.cssSelector(nextButton)).click();
+            nextButton.click();
         }
     }
 
     private void setPrevYear(int destYear) {
         while (getInputYear() != destYear) {
-            driver.findElement(By.cssSelector(previousButton)).click();
+            previousButton.click();
         }
     }
 
     private void setNextYear(int destYear) {
         while (getInputYear() != destYear) {
-            driver.findElement(By.cssSelector(nextButton)).click();
+            nextButton.click();
         }
     }
 
@@ -170,10 +183,10 @@ public class DatePickerPage {
     }
 
     private String getInputDate() {
-        return driver.findElement(By.cssSelector(datePickerInput)).getAttribute("value");
+        return datePickerInput.getAttribute("value");
     }
 
     private int getInputYear() {
-        return Integer.parseInt(driver.findElement(By.cssSelector(datePickerYear)).getText());
+        return Integer.parseInt(datePickerYear.getText());
     }
 }

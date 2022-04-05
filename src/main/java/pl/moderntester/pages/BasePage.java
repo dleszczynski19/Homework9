@@ -4,6 +4,7 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ public class BasePage {
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
     public enum Continents {
@@ -77,7 +79,7 @@ public class BasePage {
     public void downloadFile() {
         FormPage formPage = new FormPage(driver);
         int fileAmountBefore = getDirectoryFileAmount(defaultDirectoryPath);
-        driver.findElement(By.cssSelector(formPage.downloadButton)).click();
+        formPage.downloadButton.click();
         while (fileAmountBefore + 1 != getDirectoryFileAmount(defaultDirectoryPath)) {
             try {
                 Thread.sleep(500);

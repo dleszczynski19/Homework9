@@ -5,6 +5,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,27 +17,87 @@ import java.util.Locale;
 
 public class FormPage extends BasePage {
     private static Logger log = LoggerFactory.getLogger(FormPage.class);
-    private String firstNameInput = "#inputFirstName3";
-    private String lastNameInput = "#inputLastName3";
-    private String emailInput = "#inputEmail3";
-    private String ageInput = "#inputAge3";
-    private String additionalInput = "#additionalInformations";
-    private String sexListRadio = "[name=\"gridRadiosSex\"]";
-    private String maleRadio = "#gridRadiosMale";
-    private String femaleRadio = "gridRadiosFemale";
-    private String otherRadio = "gridRadiosOther";
-    private String experienceListRadio = "[name=\"gridRadiosExperience\"]";
-    private String experienceDefaultRadio = "#gridRadios"; // + id
-    private String professionListCheckbox = "[name=\"gridCheckboxProfession\"]";
-    private String manualCheckbox = "#gridCheckManulTester";
-    private String automationCheckbox = "#gridCheckAutomationTester";
-    private String otherCheckbox = "#gridCheckOther";
-    private String continentsSelect = "#selectContinents";
-    private String commandsSelect = "#selectSeleniumCommands";
-    private String chooseFileInput = "#chooseFile";
-    private String validatorMessage = "#validator-message";
-    private String signInButton = "[type=\"submit\"]";
-    public String downloadButton = ".btn.btn-secondary.btn-lg";
+
+    @FindBy(css = "#inputFirstName3")
+    private WebElement firstNameInput;
+
+    @FindBy(css = "#inputLastName3")
+    private WebElement lastNameInput;
+
+    @FindBy(css = "#inputEmail3")
+    private WebElement emailInput;
+
+    @FindBy(css = "#inputAge3")
+    private WebElement ageInput;
+
+    @FindBy(css = "#additionalInformations")
+    private WebElement additionalInput;
+
+    @FindBy(css = "[name=\"gridRadiosSex\"]")
+    private List<WebElement> sexListRadio;
+
+    @FindBy(css = "#gridRadiosMale")
+    private WebElement maleRadio;
+
+    @FindBy(css = "#gridRadiosFemale")
+    private WebElement femaleRadio;
+
+    @FindBy(css = "#gridRadiosOther")
+    private WebElement otherRadio;
+
+    @FindBy(css = "[name=\"gridRadiosExperience\"]")
+    private List<WebElement> experienceListRadio;
+
+    @FindBy(css = "[name=\"gridRadiosExperience\"]")
+    private List<WebElement> professionListCheckbox;
+
+    @FindBy(css = "#gridCheckManulTester")
+    private WebElement manualCheckbox;
+
+    @FindBy(css = "#gridCheckAutomationTester")
+    private WebElement automationCheckbox;
+
+    @FindBy(css = "#gridCheckOther")
+    private WebElement otherCheckbox;
+
+    @FindBy(css = "#selectContinents")
+    private WebElement continentsSelect;
+
+    @FindBy(css = "#selectSeleniumCommands")
+    private WebElement commandsSelect;
+
+    @FindBy(css = "#chooseFile")
+    private WebElement chooseFileInput;
+
+    @FindBy(css = "#validator-message")
+    private WebElement validatorMessage;
+
+    @FindBy(css = ".btn.btn-secondary.btn-lg")
+    public WebElement downloadButton;
+
+    @FindBy(css = "[type=\"submit\"]")
+    private WebElement signInButton;
+    //    private String firstNameInput = "#inputFirstName3";
+//    private String lastNameInput = "#inputLastName3";
+//    private String emailInput = "#inputEmail3";
+//    private String ageInput = "#inputAge3";
+//    private String additionalInput = "#additionalInformations";
+//    private String sexListRadio = "[name=\"gridRadiosSex\"]";
+//    private String maleRadio = "#gridRadiosMale";
+//    private String femaleRadio = "gridRadiosFemale";
+//    private String otherRadio = "gridRadiosOther";
+//    private String experienceListRadio = "[name=\"gridRadiosExperience\"]";
+//    private String experienceDefaultRadio = "#gridRadios"; // + id
+//    private String professionListCheckbox = "[name=\"gridCheckboxProfession\"]";
+//    private String manualCheckbox = "#gridCheckManulTester";
+//    private String automationCheckbox = "#gridCheckAutomationTester";
+//    private String otherCheckbox = "#gridCheckOther";
+//    private String continentsSelect = "#selectContinents";
+//    private String commandsSelect = "#selectSeleniumCommands";
+//    private String chooseFileInput = "#chooseFile";
+//    private String validatorMessage = "#validator-message";
+//    private String signInButton = "[type=\"submit\"]";
+//    public String downloadButton = ".btn.btn-secondary.btn-lg";
 
     public enum Sex {
         MALE, FEMALE, OTHER
@@ -55,19 +116,19 @@ public class FormPage extends BasePage {
     }
 
     public FormPage fillFirstName(String name) {
-        driver.findElement(By.cssSelector(firstNameInput)).sendKeys(name);
+        firstNameInput.sendKeys(name);
         log.info("First name input filled");
         return this;
     }
 
     public FormPage fillLastName(String lastName) {
-        driver.findElement(By.cssSelector(lastNameInput)).sendKeys(lastName);
+       lastNameInput.sendKeys(lastName);
         log.info("Last name input filled");
         return this;
     }
 
     public FormPage fillEmail(String email) {
-        driver.findElement(By.cssSelector(emailInput)).sendKeys(email);
+        emailInput.sendKeys(email);
         log.info("Email input filled");
         return this;
     }
@@ -75,13 +136,13 @@ public class FormPage extends BasePage {
     public FormPage chooseSex(Sex sex) {
         switch (sex) {
             case MALE:
-                driver.findElement(By.cssSelector(maleRadio)).click();
+                maleRadio.click();
                 break;
             case FEMALE:
-                driver.findElement(By.cssSelector(femaleRadio)).click();
+                femaleRadio.click();
                 break;
             case OTHER:
-                driver.findElement(By.cssSelector(otherRadio)).click();
+                otherRadio.click();
                 break;
         }
         log.info("Sex chosen");
@@ -89,28 +150,26 @@ public class FormPage extends BasePage {
     }
 
     public FormPage chooseRandomSex() {
-        List<WebElement> list = driver.findElements(By.cssSelector(sexListRadio));
-        clickRandomElement(list).click();
+        clickRandomElement(sexListRadio).click();
         log.info("Random sex chosen");
         return this;
     }
 
     public FormPage fillAge(int age) {
-        driver.findElement(By.cssSelector(ageInput)).clear();
-        driver.findElement(By.cssSelector(ageInput)).sendKeys(String.valueOf(age));
+        ageInput.clear();
+        ageInput.sendKeys(String.valueOf(age));
         log.info("Age input filled");
         return this;
     }
 
     public FormPage chooseRandomExperience() {
-        List<WebElement> list = driver.findElements(By.cssSelector(experienceListRadio));
-        clickRandomElement(list).click();
+        clickRandomElement(experienceListRadio).click();
         log.info("Random experience chosen");
         return this;
     }
 
     public FormPage chooseRandomContinent() {
-        Select continents = new Select(driver.findElement(By.cssSelector(continentsSelect)));
+        Select continents = new Select(continentsSelect);
         selectRandomElement(continents);
         log.info("Random continent chosen");
         return this;
@@ -118,7 +177,7 @@ public class FormPage extends BasePage {
 
     public FormPage chooseContinent(BasePage.Continents continent) {
         String text = continent.name().toLowerCase(Locale.ROOT).replaceAll("_", "-");
-        Select continents = new Select(driver.findElement(By.cssSelector(continentsSelect)));
+        Select continents = new Select(continentsSelect);
         continents.selectByValue(text);
         log.info("Continent chosen");
         return this;
@@ -127,13 +186,13 @@ public class FormPage extends BasePage {
     public FormPage chooseProfession(Profession profession) {
         switch (profession) {
             case MANUAL:
-                driver.findElement(By.cssSelector(manualCheckbox)).click();
+                manualCheckbox.click();
                 break;
             case AUTOMATION:
-                driver.findElement(By.cssSelector(automationCheckbox)).click();
+                automationCheckbox.click();
                 break;
             case OTHER:
-                driver.findElement(By.cssSelector(otherCheckbox)).click();
+                otherCheckbox.click();
                 break;
         }
         log.info("Profession selected");
@@ -142,19 +201,19 @@ public class FormPage extends BasePage {
 
     public FormPage sendFile(String filePath) {
         File file = new File(filePath);
-        driver.findElement(By.cssSelector(chooseFileInput)).sendKeys(file.getAbsolutePath());
+        chooseFileInput.sendKeys(file.getAbsolutePath());
         log.info("File send");
         return this;
     }
 
     public FormPage signIn() {
-        driver.findElement(By.cssSelector(signInButton)).click();
+        signInButton.click();
         return this;
     }
 
     public FormPage selectCommands(Commands[] commands) {
         Actions actions = new Actions(driver);
-        Select seleniumCommands = new Select(driver.findElement(By.cssSelector(commandsSelect)));
+        Select seleniumCommands = new Select(commandsSelect);
         for (int i = 0; i < commands.length; i++) {
             seleniumCommands.selectByValue(commands[i].name().toLowerCase(Locale.ROOT)
                     .replaceAll("_", "") + "-commands");
@@ -167,6 +226,6 @@ public class FormPage extends BasePage {
     }
 
     public String getValidatorMsg() {
-        return driver.findElement(By.cssSelector(validatorMessage)).getText();
+        return validatorMessage.getText();
     }
 }

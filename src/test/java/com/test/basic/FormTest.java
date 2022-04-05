@@ -2,14 +2,12 @@ package com.test.basic;
 
 import com.configuration.TestBase;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
-import pl.moderntester.pages.BasePage;
 import pl.moderntester.pages.basic.FormPage;
 
 import static org.hamcrest.MatcherAssert.assertThat;
