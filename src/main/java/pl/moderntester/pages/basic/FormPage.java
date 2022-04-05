@@ -36,6 +36,7 @@ public class FormPage extends BasePage {
     private String chooseFileInput = "#chooseFile";
     private String validatorMessage = "#validator-message";
     private String signInButton = "[type=\"submit\"]";
+    public String downloadButton = ".btn.btn-secondary.btn-lg";
 
     public enum Sex {
         MALE, FEMALE, OTHER

@@ -8,38 +8,41 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 import pl.moderntester.pages.widgets.DatePickerPage;
 
-import java.util.Random;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class DatePickerTest extends TestBase {
     private static Logger log = LoggerFactory.getLogger(DatePickerTest.class);
     private static Marker passed = MarkerFactory.getMarker("PASSED");
 
     @Test
-    public void test() {
+    public void shouldManageDatePicker() {
         DatePickerPage datePickerPage = new DatePickerPage(driver);
 
         driver.get("https://seleniumui.moderntester.pl/datepicker.php");
-        datePickerPage.clickDateInput()
+        assertThat("Wrong date", datePickerPage.clickDateInput()
                 .selectCurrentDate()
-                .isProperlyDate();
-        datePickerPage.clickDateInput()
-                .selectMonth(datePickerPage.getCurrentMonth() + 1)
-                .selectDay(1)
-                .isProperlyDate();
-        datePickerPage.clickDateInput()
-                .selectYear(2023)
-                .selectMonth(1)
-                .selectDay(31)
-                .isProperlyDate();
-        datePickerPage.clickDateInput()
-                .selectYear(2022)
-                .selectMonth(12)
-                .selectDay(new Random().nextInt(31))
-                .isProperlyDate();
-        datePickerPage.clickDateInput()
-                .selectYear(2021)
-                .selectMonth(new Random().nextInt(12))
-                .selectDay(new Random().nextInt(31))
-                .isProperlyDate();
+                .isProperlyDate());
+        log.info(passed, "Current date - selected");
+        assertThat("Wrong date", datePickerPage.clickDateInput()
+                .selectFirstDayNextMonth()
+                .isProperlyDate());
+        log.info(passed, "First day next month - selected");
+        assertThat("Wrong date", datePickerPage.clickDateInput()
+                .selectLastDayOfMonthNextYear(1)
+                .isProperlyDate());
+        log.info(passed, "Last day January next year - selected");
+        assertThat("Wrong date", datePickerPage.clickDateInput()
+                .selectInputDate()
+                .isProperlyDate());
+        log.info(passed, "Same date again - selected");
+        assertThat("Wrong date", datePickerPage.clickDateInput()
+                .selectRandomDayFromPreviousMonth()
+                .isProperlyDate());
+        log.info(passed, "Random day from previous month - selected");
+        assertThat("Wrong date", datePickerPage.clickDateInput()
+                .selectRandomDateLastYear()
+                .isProperlyDate());
+        log.info(passed, "Random date from last year - selected");
+        log.info(passed, passedMessage);
     }
 }

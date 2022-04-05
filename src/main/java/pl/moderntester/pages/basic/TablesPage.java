@@ -23,11 +23,10 @@ public class TablesPage extends BasePage {
     }
 
     public Mountain addMountain(WebElement element) {
-        return new Mountain(Integer.parseInt(element.findElement(By.cssSelector("th")).getText()), element
-                .findElement(By.xpath("./td[1]")).getText(), element.findElement(By.xpath("./td[2]")).getText(),
-                element.findElement(By.xpath("./td[3]")).getText(), Integer.parseInt(element
-                .findElement(By.xpath("./td[4]")).getText())
-        );
+        List<WebElement> rowList = element.findElements(By.cssSelector("td"));
+        log.info("Mountain with pick " + rowList.get(0).getText() + " added");
+        return new Mountain(Integer.parseInt(element.findElement(By.cssSelector("th")).getText()), rowList.get(0).getText(),
+                rowList.get(1).getText(), rowList.get(2).getText(), Integer.parseInt(rowList.get(3).getText()));
     }
 
     public TablesPage setTableList() {
@@ -53,7 +52,7 @@ public class TablesPage extends BasePage {
         return this;
     }
 
-    public int getFilteredListSize(){
+    public int getFilteredListSize() {
         return filteredList.size();
     }
 }

@@ -15,7 +15,7 @@ public class DraggablePage extends BasePage {
     }
 
     public enum Position {
-        CENTER, UPPER_LEFT, UPPER_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT
+        BOTTOM_LEFT, BOTTOM_RIGHT, CENTER, UPPER_LEFT, UPPER_RIGHT,
     }
 
     public DraggablePage dragElementTo(Position position) {
@@ -50,6 +50,10 @@ public class DraggablePage extends BasePage {
         Dimension element = getElementSize();
 
         switch (position) {
+            case BOTTOM_LEFT:
+                return new Point(0, window.height - element.height);
+            case BOTTOM_RIGHT:
+                return new Point(window.width - element.width, window.height - element.height);
             case CENTER:
                 return new Point(Math.floorDiv(window.width, 2) - Math.floorDiv(element.width, 2),
                         Math.floorDiv(window.height, 2) - Math.floorDiv(element.height, 2));
@@ -57,10 +61,6 @@ public class DraggablePage extends BasePage {
                 return new Point(0, 0);
             case UPPER_RIGHT:
                 return new Point(window.width - element.width, 0);
-            case BOTTOM_LEFT:
-                return new Point(0, window.height - element.height);
-            case BOTTOM_RIGHT:
-                return new Point(window.width - element.width, window.height - element.height);
             default:
                 throw new IllegalArgumentException("Illegal position value " + position);
         }
