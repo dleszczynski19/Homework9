@@ -9,10 +9,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 public class TestBase {
     public WebDriver driver;
     public final String passedMessage = "Test Passed!";
+    public final static Marker passed = MarkerFactory.getMarker("PASSED");
     private static Logger log = LoggerFactory.getLogger(TestBase.class);
 
     @BeforeAll

@@ -14,7 +14,6 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class AutocompleteTest extends TestBase {
     private static Logger log = LoggerFactory.getLogger(AutocompleteTest.class);
-    private static Marker passed = MarkerFactory.getMarker("PASSED");
 
     @Test
     @DisplayName("Autocomplete Test")

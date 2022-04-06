@@ -5,8 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.Marker;
-import org.slf4j.MarkerFactory;
 import pl.moderntester.pages.basic.AlertsPage;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -14,7 +12,6 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class AlertTests extends TestBase {
     private static Logger log = LoggerFactory.getLogger(AlertTests.class);
-    private static Marker passed = MarkerFactory.getMarker("PASSED");
     private String url = "https://seleniumui.moderntester.pl/alerts.php";
     String expectedLabel = "OK button pressed";
 

@@ -5,8 +5,6 @@ import net.joshka.junit.json.params.JsonFileSource;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.Marker;
-import org.slf4j.MarkerFactory;
 import pl.moderntester.pages.widgets.AccordionPage;
 
 import javax.json.JsonObject;
@@ -16,7 +14,6 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class AccordionTest extends TestBase {
     private static Logger log = LoggerFactory.getLogger(AccordionTest.class);
-    private static Marker passed = MarkerFactory.getMarker("PASSED");
 
     @ParameterizedTest(name = "Accordion Test")
     @JsonFileSource(resources = "/data/accordion.json")

@@ -15,7 +15,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class IframesTest extends TestBase {
     private static Logger log = LoggerFactory.getLogger(IframesTest.class);
-    private static Marker passed = MarkerFactory.getMarker("PASSED");
 
     @ParameterizedTest()
     @CsvFileSource(resources = "/data/iframe.csv")

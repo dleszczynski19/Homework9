@@ -5,8 +5,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.Marker;
-import org.slf4j.MarkerFactory;
 import pl.moderntester.pages.widgets.ModalDialogPage;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -14,7 +12,6 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class ModalDialogTest extends TestBase {
     private static Logger log = LoggerFactory.getLogger(ModalDialogTest.class);
-    private static Marker passed = MarkerFactory.getMarker("PASSED");
 
     @ParameterizedTest(name = "Test for {0}")
     @CsvFileSource(resources = "/data/modal_dialog.csv")
