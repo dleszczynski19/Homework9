@@ -22,7 +22,8 @@ public class DropTest extends TestBase {
 
         driver.get("https://seleniumui.moderntester.pl/droppable.php");
         assertThat("Wrong alert label", expectedText,
-                equalTo(interactionsPage.dragAndDrop()
+                equalTo(interactionsPage
+                        .dragAndDrop()
                         .getText()));
         log.info(passed, passedMessage);
     }

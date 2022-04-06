@@ -19,7 +19,8 @@ public class SortTest extends TestBase {
         SortablePage sortablePage = new SortablePage(driver);
 
         driver.get("https://seleniumui.moderntester.pl/sortable.php");
-        sortablePage.shuffleArray()
+        sortablePage
+                .shuffleArray()
                 .moveItemsToMatchArray();
         assertThat("Wrong order!", sortablePage.checkItemOrder());
         log.info(passed, passedMessage);

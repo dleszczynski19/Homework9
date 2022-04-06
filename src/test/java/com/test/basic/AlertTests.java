@@ -26,7 +26,8 @@ public class AlertTests extends TestBase {
 
         driver.get(url);
         assertThat("Wrong alert label", expectedLabel,
-                equalTo(alertsPage.handleSimpleAlert()
+                equalTo(alertsPage
+                        .handleSimpleAlert()
                         .getAlertLabel()));
         log.info(passed, passedMessage);
     }
@@ -40,7 +41,8 @@ public class AlertTests extends TestBase {
         expectedLabel = "Hello " + name + "! How are you today?";
         driver.get(url);
         assertThat("Wrong alert label", expectedLabel,
-                equalTo(alertsPage.handlePromptPopup(name)
+                equalTo(alertsPage
+                        .handlePromptPopup(name)
                         .getPromptLabel()));
         log.info(passed, passedMessage);
     }
@@ -53,12 +55,14 @@ public class AlertTests extends TestBase {
         driver.get(url);
         expectedLabel = "You pressed OK!";
         assertThat("Wrong alert label", expectedLabel,
-                equalTo(alertsPage.handleAcceptConfirmPopup()
+                equalTo(alertsPage
+                        .handleAcceptConfirmPopup()
                         .getConfirmLabel()));
         log.info(passed, "Accept confirm pop up passed");
         expectedLabel = "You pressed Cancel!";
         assertThat("Wrong alert label", expectedLabel,
-                equalTo(alertsPage.handleCancelConfirmPopup()
+                equalTo(alertsPage
+                        .handleCancelConfirmPopup()
                         .getConfirmLabel()));
         log.info(passed, "Cancel confirm pop up passed");
         log.info(passed, passedMessage);
@@ -71,7 +75,8 @@ public class AlertTests extends TestBase {
 
         driver.get(url);
         assertThat("Wrong alert label", expectedLabel,
-                equalTo(alertsPage.handleDelayedAlert()
+                equalTo(alertsPage
+                        .handleDelayedAlert()
                         .getDelayedLabel()));
         log.info(passed, passedMessage);
     }

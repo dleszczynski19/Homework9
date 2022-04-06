@@ -17,7 +17,8 @@ public class SelectMenuTest extends TestBase {
         SelectMenuPage selectMenuPage = new SelectMenuPage(driver);
 
         driver.get("https://seleniumui.moderntester.pl/selectmenu.php");
-        selectMenuPage.selectOption(SelectMenuPage.SelectOptions.SPEED)
+        selectMenuPage
+                .selectOption(SelectMenuPage.SelectOptions.SPEED)
                 .selectOption(SelectMenuPage.SelectOptions.FILE, "Some unknown file")
                 .selectOption(SelectMenuPage.SelectOptions.NUMBER, 2)
                 .selectOption(SelectMenuPage.SelectOptions.TITLE);

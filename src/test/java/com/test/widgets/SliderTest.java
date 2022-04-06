@@ -17,7 +17,8 @@ public class SliderTest extends TestBase {
         SliderPage sliderPage = new SliderPage(driver);
 
         driver.get("https://seleniumui.moderntester.pl/slider.php");
-        sliderPage.moveSlider(50)
+        sliderPage
+                .moveSlider(50)
                 .moveSlider(80)
                 .moveSlider(80)
                 .moveSlider(20)

@@ -17,7 +17,8 @@ public class DragTest extends TestBase {
         DraggablePage draggablePage = new DraggablePage(driver);
 
         driver.get("https://seleniumui.moderntester.pl/draggable.php");
-        draggablePage.dragElementTo(DraggablePage.Position.UPPER_RIGHT)
+        draggablePage
+                .dragElementTo(DraggablePage.Position.UPPER_RIGHT)
                 .dragElementTo(DraggablePage.Position.BOTTOM_RIGHT)
                 .dragElementTo(DraggablePage.Position.CENTER)
                 .dragElementTo(DraggablePage.Position.BOTTOM_LEFT);

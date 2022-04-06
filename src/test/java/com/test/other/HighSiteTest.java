@@ -19,7 +19,8 @@ public class HighSiteTest extends TestBase {
         HighSitePage highSitePage = new HighSitePage(driver);
 
         driver.get("https://seleniumui.moderntester.pl/high-site.php");
-        highSitePage.scrollToButton()
+        highSitePage
+                .scrollToButton()
                 .doScreenShot("scroll_to");
         assertThat("Button is no visible", highSitePage.isButtonVisible());
         log.info(passed, passedMessage);

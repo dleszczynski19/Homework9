@@ -19,27 +19,33 @@ public class DatePickerTest extends TestBase {
         DatePickerPage datePickerPage = new DatePickerPage(driver);
 
         driver.get("https://seleniumui.moderntester.pl/datepicker.php");
-        assertThat("Wrong date", datePickerPage.clickDateInput()
+        assertThat("Wrong date", datePickerPage
+                .clickDateInput()
                 .selectCurrentDate()
                 .isProperlyDate());
         log.info(passed, "Current date - selected");
-        assertThat("Wrong date", datePickerPage.clickDateInput()
+        assertThat("Wrong date", datePickerPage
+                .clickDateInput()
                 .selectFirstDayNextMonth()
                 .isProperlyDate());
         log.info(passed, "First day next month - selected");
-        assertThat("Wrong date", datePickerPage.clickDateInput()
+        assertThat("Wrong date", datePickerPage
+                .clickDateInput()
                 .selectLastDayOfMonthNextYear(1)
                 .isProperlyDate());
         log.info(passed, "Last day January next year - selected");
-        assertThat("Wrong date", datePickerPage.clickDateInput()
+        assertThat("Wrong date", datePickerPage
+                .clickDateInput()
                 .selectInputDate()
                 .isProperlyDate());
         log.info(passed, "Same date again - selected");
-        assertThat("Wrong date", datePickerPage.clickDateInput()
+        assertThat("Wrong date", datePickerPage
+                .clickDateInput()
                 .selectRandomDayFromPreviousMonth()
                 .isProperlyDate());
         log.info(passed, "Random day from previous month - selected");
-        assertThat("Wrong date", datePickerPage.clickDateInput()
+        assertThat("Wrong date", datePickerPage
+                .clickDateInput()
                 .selectRandomDateLastYear()
                 .isProperlyDate());
         log.info(passed, "Random date from last year - selected");

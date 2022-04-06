@@ -18,7 +18,8 @@ public class WindowsTest extends TestBase {
 
         log.info("Start  Test");
         driver.get("https://seleniumui.moderntester.pl/windows-tabs.php");
-        windowsPage.manageNewBrowserWindow()
+        windowsPage
+                .manageNewBrowserWindow()
                 .manageNewMessageWindow()
                 .manageNewBrowserTab();
         log.info(passed, passedMessage);

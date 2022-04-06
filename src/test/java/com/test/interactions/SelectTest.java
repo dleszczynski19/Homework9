@@ -21,7 +21,8 @@ public class SelectTest extends TestBase {
         SelectablePage selectablePage = new SelectablePage(driver);
 
         driver.get("https://seleniumui.moderntester.pl/selectable.php");
-        selectablePage.selectItem(1)
+        selectablePage
+                .selectItem(1)
                 .selectItem(3)
                 .selectItem(4);
         assertThat(selectablePage.getFeedback(), equalTo("You've selected: #1 #3 #4."));

@@ -22,7 +22,8 @@ public class AutocompleteTest extends TestBase {
         AutocompletePage autocompletePage = new AutocompletePage(driver);
 
         driver.get("https://seleniumui.moderntester.pl/autocomplete.php");
-        autocompletePage.writeText("a")
+        autocompletePage
+                .writeText("a")
                 .getOptionsList()
                 .getOptionsText();
         assertThat("Wrong option value", autocompletePage.getOptionValue(), equalTo(autocompletePage.getInputValue()));

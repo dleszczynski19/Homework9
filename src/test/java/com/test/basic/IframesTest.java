@@ -24,7 +24,8 @@ public class IframesTest extends TestBase {
         IframePage iframePage = new IframePage(driver);
 
         driver.get("https://seleniumui.moderntester.pl/iframes.php");
-        iframePage.switchToIframe(1)
+        iframePage
+                .switchToIframe(1)
                 .fillFirstName(name)
                 .fillSurname(surname)
                 .switchToDefaultIframe()
