@@ -1,10 +1,7 @@
 package pl.moderntester.pages.configuration;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
@@ -49,5 +46,27 @@ public class BasePage {
 
     public void selectRandomElement(Select selectList) {
         selectList.selectByIndex(new Random().nextInt(selectList.getOptions().size()));
+    }
+
+    public Dimension getWindowSize() {
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        int width = Integer.parseInt(String.valueOf(jse.executeScript("return window.innerWidth")));
+        int height = Integer.parseInt(String.valueOf(jse.executeScript("return window.innerHeight")));
+        return new Dimension(width, height);
+    }
+
+    public Dimension getElementSize(WebElement element) {
+        int height = Integer.parseInt(element.getCssValue("height")
+                .replace("px", ""));
+        int width = Integer.parseInt(element.getCssValue("width")
+                .replace("px", ""));
+        return new Dimension(width, height);
+    }
+
+    public WebElement findOptionByText(List<WebElement> optionsList, String optionName){
+        return optionsList.stream()
+                .filter(opt -> opt.getText().equals(optionName))
+                .reduce((f, s) -> s)
+                .orElseThrow(() -> new RuntimeException("Can't find option"));
     }
 }

@@ -19,7 +19,7 @@ public class TablesPage extends BasePage {
     private List<Mountain> filteredList = new ArrayList<>();
 
     @FindBy(css = "tbody tr")
-    private List<WebElement> tableCss;
+    private List<WebElement> mountainsTable;
 
     public TablesPage(WebDriver driver) {
         super(driver);
@@ -33,7 +33,7 @@ public class TablesPage extends BasePage {
     }
 
     public TablesPage setTableList() {
-        for (WebElement webElement : tableCss) {
+        for (WebElement webElement : mountainsTable) {
             listMountain.add(addMountain(webElement));
         }
         log.info("Table list set");

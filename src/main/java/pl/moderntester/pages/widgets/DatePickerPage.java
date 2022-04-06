@@ -10,10 +10,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.moderntester.pages.configuration.BasePage;
 
+import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -106,9 +108,10 @@ public class DatePickerPage extends BasePage {
 
     private DatePickerPage selectMonth(int destinationMonth) {
         wait.until(ExpectedConditions.visibilityOf(datePickerMonth));
-        int currentMonth = getCurrentMonth();
+        int currentMonth = getInputMonth();
         if (currentMonth > destinationMonth) setPrevMonth(destinationMonth);
         else if (currentMonth < destinationMonth) setNextMonth(destinationMonth);
+        wait.until(ExpectedConditions.textToBePresentInElement(datePickerMonth, getMonthName(destinationMonth)));
         this.destinationMonth = destinationMonth;
         return this;
     }
@@ -130,11 +133,11 @@ public class DatePickerPage extends BasePage {
     }
 
     private String parseDate(int value) {
-        if (value < 9) return "0" + value;
+        if (value <= 9) return "0" + value;
         else return String.valueOf(value);
     }
 
-    private int getCurrentMonth() {
+    private int getInputMonth() {
         Date date = null;
         try {
             date = new SimpleDateFormat("MMMM", Locale.ENGLISH).parse(datePickerMonth.getText());
@@ -155,13 +158,13 @@ public class DatePickerPage extends BasePage {
     }
 
     private void setPrevMonth(int destMonth) {
-        while (getCurrentMonth() != destMonth) {
+        while (getInputMonth() != destMonth) {
             previousButton.click();
         }
     }
 
     private void setNextMonth(int destMonth) {
-        while (getCurrentMonth() != destMonth) {
+        while (getInputMonth() != destMonth) {
             nextButton.click();
         }
     }
@@ -184,6 +187,11 @@ public class DatePickerPage extends BasePage {
 
     private String getInputDate() {
         return datePickerInput.getAttribute("value");
+    }
+
+    private String getMonthName(int month) {
+        String monthName = Month.of(month).name().toLowerCase(Locale.ROOT);
+        return monthName.substring(0, 1).toUpperCase(Locale.ROOT) + monthName.substring(1);
     }
 
     private int getInputYear() {

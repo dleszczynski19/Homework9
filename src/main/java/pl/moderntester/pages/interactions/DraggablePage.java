@@ -32,24 +32,9 @@ public class DraggablePage extends BasePage {
         return this;
     }
 
-    private Dimension getWindowSize() {
-        JavascriptExecutor jse = (JavascriptExecutor) driver;
-        int width = Integer.parseInt(String.valueOf(jse.executeScript("return window.innerWidth")));
-        int height = Integer.parseInt(String.valueOf(jse.executeScript("return window.innerHeight")));
-        return new Dimension(width, height);
-    }
-
-    private Dimension getElementSize() {
-        int height = Integer.parseInt(draggableElement.getCssValue("height")
-                .replace("px", ""));
-        int width = Integer.parseInt(draggableElement.getCssValue("width")
-                .replace("px", ""));
-        return new Dimension(width, height);
-    }
-
     private Point getPositionToDrag(Position position) {
         Dimension window = getWindowSize();
-        Dimension element = getElementSize();
+        Dimension element = getElementSize(draggableElement);
 
         switch (position) {
             case BOTTOM_LEFT:

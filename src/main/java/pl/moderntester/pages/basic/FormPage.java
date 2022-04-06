@@ -100,7 +100,7 @@ public class FormPage extends BasePage {
     }
 
     public FormPage fillLastName(String lastName) {
-       lastNameInput.sendKeys(lastName);
+        lastNameInput.sendKeys(lastName);
         log.info("Last name input filled");
         return this;
     }

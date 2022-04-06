@@ -52,10 +52,8 @@ public class SelectMenuPage extends BasePage {
 
     public SelectMenuPage selectOption(SelectOptions option, String value) {
         driver.findElement(By.cssSelector(option.getCssSelector())).click();
-        optionsList.stream().filter(opt -> opt.getText().equals(value))
-                .reduce((f, s) -> s)
-                .orElseThrow(() -> new RuntimeException("Can't find option"))
-                .click();
+        WebElement selectedOption = findOptionByText(optionsList, value);
+        selectedOption.click();
         log.info("Option selected");
         return this;
     }

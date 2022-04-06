@@ -24,9 +24,7 @@ public class MenuPage extends BasePage {
     }
 
     public MenuPage selectOption(String optionName, boolean isWaitNeeded) {
-        WebElement option = optionsList.stream().filter(opt -> opt.getText().equals(optionName))
-                .reduce((f, s) -> s)
-                .orElseThrow(() -> new RuntimeException("Can't find option"));
+        WebElement option = findOptionByText(optionsList, optionName);
         option.click();
         if (isWaitNeeded) {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
