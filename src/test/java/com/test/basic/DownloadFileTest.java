@@ -10,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.moderntester.pages.BasePage;
+import pl.moderntester.pages.configuration.FileHandler;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -28,8 +28,8 @@ public class DownloadFileTest {
 
     @BeforeEach
     void initializeDriver() {
-        BasePage basePage = new BasePage();
-        ChromeOptions options = basePage.setDefaultDownloadDirectory(downloadPath);
+        FileHandler fileHandler = new FileHandler(driver, downloadPath);
+        ChromeOptions options = fileHandler.setDefaultDownloadDirectory();
         driver = new ChromeDriver(options);
         log.info("Driver initialized properly");
     }
@@ -42,14 +42,14 @@ public class DownloadFileTest {
 
     @Test
     public void shouldDownloadFileToSpecificDirectory() {
-        BasePage basePage = new BasePage(driver);
+        FileHandler fileHandler = new FileHandler(driver, downloadPath);
 
         driver.get("https://seleniumui.moderntester.pl/form.php");
-        int fileAmountBefore = basePage.getDirectoryFileAmount(downloadPath);
-        basePage.downloadFile();
+        int fileAmountBefore = fileHandler.getDirectoryFileAmount();
+        fileHandler.downloadFile();
         assertThat("Wrong amount of files!", fileAmountBefore + 1,
-                equalTo(basePage.getDirectoryFileAmount(downloadPath)));
-        assertThat("File doesn't exist", basePage.isFileDownloaded(downloadPath, "test-file-to-download.xlsx"));
+                equalTo(fileHandler.getDirectoryFileAmount()));
+        assertThat("File doesn't exist", fileHandler.isFileDownloaded("test-file-to-download.xlsx"));
         log.info("Test Passed!");
     }
 }

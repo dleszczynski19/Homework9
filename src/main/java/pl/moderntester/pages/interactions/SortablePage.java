@@ -7,7 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.moderntester.pages.BasePage;
+import pl.moderntester.pages.configuration.BasePage;
 
 import java.util.Arrays;
 import java.util.List;

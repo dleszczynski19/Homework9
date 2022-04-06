@@ -3,7 +3,7 @@ package pl.moderntester.pages.widgets;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pl.moderntester.pages.BasePage;
+import pl.moderntester.pages.configuration.BasePage;
 
 public class TooltipPage extends BasePage {
 

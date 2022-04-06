@@ -1,6 +1,5 @@
 package pl.moderntester.pages.basic;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.moderntester.pages.BasePage;
+import pl.moderntester.pages.configuration.BasePage;
 
 import java.io.File;
 import java.util.List;
@@ -77,27 +76,6 @@ public class FormPage extends BasePage {
 
     @FindBy(css = "[type=\"submit\"]")
     private WebElement signInButton;
-    //    private String firstNameInput = "#inputFirstName3";
-//    private String lastNameInput = "#inputLastName3";
-//    private String emailInput = "#inputEmail3";
-//    private String ageInput = "#inputAge3";
-//    private String additionalInput = "#additionalInformations";
-//    private String sexListRadio = "[name=\"gridRadiosSex\"]";
-//    private String maleRadio = "#gridRadiosMale";
-//    private String femaleRadio = "gridRadiosFemale";
-//    private String otherRadio = "gridRadiosOther";
-//    private String experienceListRadio = "[name=\"gridRadiosExperience\"]";
-//    private String experienceDefaultRadio = "#gridRadios"; // + id
-//    private String professionListCheckbox = "[name=\"gridCheckboxProfession\"]";
-//    private String manualCheckbox = "#gridCheckManulTester";
-//    private String automationCheckbox = "#gridCheckAutomationTester";
-//    private String otherCheckbox = "#gridCheckOther";
-//    private String continentsSelect = "#selectContinents";
-//    private String commandsSelect = "#selectSeleniumCommands";
-//    private String chooseFileInput = "#chooseFile";
-//    private String validatorMessage = "#validator-message";
-//    private String signInButton = "[type=\"submit\"]";
-//    public String downloadButton = ".btn.btn-secondary.btn-lg";
 
     public enum Sex {
         MALE, FEMALE, OTHER

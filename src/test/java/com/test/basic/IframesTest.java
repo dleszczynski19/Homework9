@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
-import pl.moderntester.pages.BasePage;
+import pl.moderntester.pages.configuration.BasePage;
 import pl.moderntester.pages.basic.IframePage;
 
 import static org.hamcrest.MatcherAssert.assertThat;
