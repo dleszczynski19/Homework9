@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.moderntester.basic.models.Mountain;
+import pl.moderntester.models.basic.Mountain;
 import pl.moderntester.pages.configuration.BasePage;
 
 import java.util.ArrayList;

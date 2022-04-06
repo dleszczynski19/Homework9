@@ -1,4 +1,4 @@
-package pl.moderntester.basic.models;
+package pl.moderntester.models.basic;
 
 public class Mountain {
     private int rank;
