@@ -36,7 +36,6 @@ public class ModalDialogPage extends BasePage {
     }
 
     public ModalDialogPage createNewUser(String name, String email, String pass) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         createUserButton.click();
         wait.until(ExpectedConditions.visibilityOf(nameInput));
         typeName(name);

@@ -4,12 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.moderntester.pages.configuration.BasePage;
-
-import java.time.Duration;
 
 public class AlertsPage extends BasePage {
     private static Logger log = LoggerFactory.getLogger(AlertsPage.class);
@@ -72,7 +69,6 @@ public class AlertsPage extends BasePage {
     }
 
     public AlertsPage handleDelayedAlert() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         delayedPopupButton.click();
         wait.until(ExpectedConditions.alertIsPresent());
         driver.switchTo().alert().accept();

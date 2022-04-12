@@ -73,5 +73,4 @@ public class SortablePage extends BasePage {
     private int[] getNumberArray() {
         return numberArray;
     }
-
 }

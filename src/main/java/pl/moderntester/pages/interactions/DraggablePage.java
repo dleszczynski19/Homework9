@@ -1,13 +1,16 @@
 package pl.moderntester.pages.interactions;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.moderntester.pages.configuration.BasePage;
+import pl.moderntester.pages.configuration.WebElementHelper;
 
-public class DraggablePage extends BasePage {
+public class DraggablePage extends WebElementHelper {
     private static Logger log = LoggerFactory.getLogger(DraggablePage.class);
 
     @FindBy(css = "#draggable")

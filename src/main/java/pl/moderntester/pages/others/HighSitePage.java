@@ -1,15 +1,13 @@
 package pl.moderntester.pages.others;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.moderntester.pages.configuration.BasePage;
+import pl.moderntester.pages.configuration.WebElementHelper;
 
-public class HighSitePage extends BasePage {
+public class HighSitePage extends WebElementHelper {
     private static Logger log = LoggerFactory.getLogger(HighSitePage.class);
 
     @FindBy(css = "#scroll-button")
@@ -20,20 +18,11 @@ public class HighSitePage extends BasePage {
     }
 
     public HighSitePage scrollToButton() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-
-        while (!isButtonVisible()) {
-            js.executeScript("window.scrollBy(0,250)", "");
-        }
-        log.info("Scrolled to button");
+        scrollToElement(submitButton);
         return this;
     }
 
     public boolean isButtonVisible() {
-        try {
-            return submitButton.isDisplayed();
-        } catch (NoSuchElementException e) {
-            return false;
-        }
+        return isElementVisible(submitButton);
     }
 }

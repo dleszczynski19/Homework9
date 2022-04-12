@@ -6,12 +6,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.moderntester.pages.configuration.BasePage;
+import pl.moderntester.pages.configuration.WebElementHelper;
 
 import java.util.List;
 import java.util.Random;
 
-public class SelectMenuPage extends BasePage {
+public class SelectMenuPage extends WebElementHelper {
     private static Logger log = LoggerFactory.getLogger(SelectMenuPage.class);
 
     @FindBy(css = ".ui-selectmenu-open .ui-menu-item:not(.ui-state-disabled")

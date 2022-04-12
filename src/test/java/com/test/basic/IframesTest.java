@@ -6,10 +6,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.Marker;
-import org.slf4j.MarkerFactory;
-import pl.moderntester.pages.configuration.BasePage;
 import pl.moderntester.pages.basic.IframePage;
+import pl.moderntester.pages.configuration.BasePage;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -24,18 +22,20 @@ public class IframesTest extends TestBase {
 
         driver.get("https://seleniumui.moderntester.pl/iframes.php");
         iframePage
-                .switchToIframe(1)
+                .switchToFirstIframe()
                 .fillFirstName(name)
                 .fillSurname(surname)
-                .switchToDefaultIframe()
-                .switchToIframe(2)
+                .switchToDefaultIframe();
+        iframePage
+                .switchToSecondIframe()
                 .fillLogin(login)
                 .fillPassword(pass)
                 .chooseContinent(continent)
                 .chooseRandomExperience()
-                .switchToDefaultIframe()
+                .switchToDefaultIframe();
+        iframePage
                 .navigateToBasic()
-                .switchToIframe(1)
+                .switchToFirstIframe()
                 .signIn();
         assertThat("Input should be empty", iframePage.getFirstNameValue().isEmpty());
         log.info(passed, passedMessage);

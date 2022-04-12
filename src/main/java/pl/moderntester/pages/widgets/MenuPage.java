@@ -8,12 +8,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.moderntester.pages.configuration.BasePage;
+import pl.moderntester.pages.configuration.WebElementHelper;
 
 import java.time.Duration;
 import java.util.List;
 
-public class MenuPage extends BasePage {
+public class MenuPage extends WebElementHelper {
     private static Logger log = LoggerFactory.getLogger(MenuPage.class);
 
     @FindBy(css = ".ui-menu-item:not(.ui-state-disabled)")

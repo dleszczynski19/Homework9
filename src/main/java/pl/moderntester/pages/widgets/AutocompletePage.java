@@ -4,12 +4,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.moderntester.pages.configuration.BasePage;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.Random;
 
@@ -33,7 +31,6 @@ public class AutocompletePage extends BasePage {
     }
 
     public AutocompletePage writeText(String text) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         inputSearch.sendKeys(text);
         wait.until(ExpectedConditions.attributeContains(optionsUl, "style", "block"));
         log.info("Text written");

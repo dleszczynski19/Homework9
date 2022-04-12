@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.moderntester.pages.configuration.BasePage;
 
-import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -22,7 +21,6 @@ import java.util.Locale;
 import java.util.Random;
 
 public class DatePickerPage extends BasePage {
-    private WebDriverWait wait;
     private static Logger log = LoggerFactory.getLogger(DatePickerPage.class);
 
     @FindBy(css = "#datepicker")
@@ -47,7 +45,6 @@ public class DatePickerPage extends BasePage {
 
     public DatePickerPage(WebDriver driver) {
         super(driver);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     public DatePickerPage clickDateInput() {

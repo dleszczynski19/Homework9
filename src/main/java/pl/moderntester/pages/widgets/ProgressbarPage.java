@@ -19,7 +19,7 @@ public class ProgressbarPage extends BasePage {
     }
 
     public ProgressbarPage waitToCompleted() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.attributeContains(progressbar, "aria-valuenow", "100"));
         return this;
     }

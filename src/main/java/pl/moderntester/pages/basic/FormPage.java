@@ -9,12 +9,13 @@ import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.moderntester.pages.configuration.BasePage;
+import pl.moderntester.pages.configuration.WebElementHelper;
 
 import java.io.File;
 import java.util.List;
 import java.util.Locale;
 
-public class FormPage extends BasePage {
+public class FormPage extends WebElementHelper {
     private static Logger log = LoggerFactory.getLogger(FormPage.class);
 
     @FindBy(css = "#inputFirstName3")
@@ -192,8 +193,8 @@ public class FormPage extends BasePage {
     public FormPage selectCommands(Commands[] commands) {
         Actions actions = new Actions(driver);
         Select seleniumCommands = new Select(commandsSelect);
-        for (int i = 0; i < commands.length; i++) {
-            seleniumCommands.selectByValue(commands[i].name().toLowerCase(Locale.ROOT)
+        for (Commands command : commands) {
+            seleniumCommands.selectByValue(command.name().toLowerCase(Locale.ROOT)
                     .replaceAll("_", "") + "-commands");
             actions.keyUp(Keys.LEFT_CONTROL)
                     .build()
@@ -205,5 +206,9 @@ public class FormPage extends BasePage {
 
     public String getValidatorMsg() {
         return validatorMessage.getText();
+    }
+
+    public WebElement getFirstNameInput() {
+        return firstNameInput;
     }
 }

@@ -7,17 +7,14 @@ import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.moderntester.pages.configuration.BasePage;
+import pl.moderntester.pages.configuration.IframeHelper;
 
 import java.util.List;
 import java.util.Locale;
 
-public class IframePage extends BasePage {
+public class IframePage extends IframeHelper {
     private static Logger log = LoggerFactory.getLogger(IframePage.class);
-
-    private String iframe = "iframe";
-
-    @FindBy(css = "#inputFirstName3")
-    private WebElement firstNameInput;
+    private FormPage formPage;
 
     @FindBy(css = "#inputSurname3")
     private WebElement surnameInput;
@@ -28,37 +25,32 @@ public class IframePage extends BasePage {
     @FindBy(css = "#inputPassword")
     private WebElement passInput;
 
-    @FindBy(css = "#inlineFormCustomSelectPref")
-    private WebElement continentsSelect;
-
     @FindBy(css = "[name=\"gridRadios\"]")
     private List<WebElement> experienceListRadio;
 
-    @FindBy(css = "[type=\"submit\"]")
-    private WebElement signInButton;
+    @FindBy(css = "#inlineFormCustomSelectPref")
+    private WebElement continentsSelect;
 
     @FindBy(css = ".nav-ite.dropdown")
     private WebElement basicButton;
 
     public IframePage(WebDriver driver) {
         super(driver);
+        formPage = new FormPage(driver);
     }
 
-    public IframePage switchToIframe(int index) {
-        driver.switchTo().frame(iframe + index);
-        log.info("Iframe switched to one with index: " + index);
+    public IframePage switchToFirstIframe() {
+        switchToIframe("iframe1");
         return this;
     }
 
-    public IframePage switchToDefaultIframe() {
-        driver.switchTo().defaultContent();
-        log.info("Iframe switched to default");
+    public IframePage switchToSecondIframe() {
+        switchToIframe("iframe2");
         return this;
     }
 
     public IframePage fillFirstName(String name) {
-        firstNameInput.sendKeys(name);
-        log.info("First name input filled");
+        formPage.fillFirstName(name);
         return this;
     }
 
@@ -89,7 +81,7 @@ public class IframePage extends BasePage {
     }
 
     public IframePage chooseRandomExperience() {
-        clickRandomElement(experienceListRadio);
+        formPage.clickRandomElement(experienceListRadio);
         log.info("Random experience value chosen");
         return this;
     }
@@ -100,11 +92,11 @@ public class IframePage extends BasePage {
     }
 
     public String getFirstNameValue() {
-        return firstNameInput.getAttribute("value");
+        return formPage.getFirstNameInput().getAttribute("value");
     }
 
     public IframePage signIn() {
-        signInButton.click();
+        formPage.signIn();
         return this;
     }
 }
