@@ -60,7 +60,8 @@ public class WindowsPage extends WindowHelper {
     private void executeTableTest() {
         TablesPage tablesPage = new TablesPage(driver);
 
-        tablesPage.setTableList()
+        tablesPage
+                .setAllPeaksList()
                 .setMountainByFilter("Switzerland", 4000)
                 .printMountain();
         assertThat("Wrong filtering", tablesPage.getFilteredListSize(), equalTo(6));

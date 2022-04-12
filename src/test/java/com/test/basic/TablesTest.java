@@ -20,7 +20,7 @@ public class TablesTest extends TestBase {
 
         driver.get("https://seleniumui.moderntester.pl/table.php");
         tablesPage
-                .setTableList()
+                .setAllPeaksList()
                 .setMountainByFilter("Switzerland", 4000)
                 .printMountain();
         assertThat("Wrong filtering", tablesPage.getFilteredListSize(), equalTo(6));

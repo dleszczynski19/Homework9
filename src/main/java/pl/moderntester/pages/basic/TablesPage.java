@@ -1,12 +1,10 @@
 package pl.moderntester.pages.basic;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.moderntester.models.basic.Mountain;
 import pl.moderntester.pages.configuration.BasePage;
 
 import java.util.ArrayList;
@@ -15,29 +13,14 @@ import java.util.stream.Collectors;
 
 public class TablesPage extends BasePage {
     private static Logger log = LoggerFactory.getLogger(TablesPage.class);
-    private final List<Mountain> listMountain = new ArrayList<>();
-    private List<Mountain> filteredList = new ArrayList<>();
+    private List<RowPage> allPeaksList = new ArrayList<>();
+    private List<RowPage> filteredList = new ArrayList<>();
 
     @FindBy(css = "tbody tr")
     private List<WebElement> mountainsTable;
 
     public TablesPage(WebDriver driver) {
         super(driver);
-    }
-
-    public Mountain addMountain(WebElement element) {
-        List<WebElement> rowList = element.findElements(By.cssSelector("td"));
-        log.info("Mountain with pick " + rowList.get(0).getText() + " added");
-        return new Mountain(Integer.parseInt(element.findElement(By.cssSelector("th")).getText()), rowList.get(0).getText(),
-                rowList.get(1).getText(), rowList.get(2).getText(), Integer.parseInt(rowList.get(3).getText()));
-    }
-
-    public TablesPage setTableList() {
-        for (WebElement webElement : mountainsTable) {
-            listMountain.add(addMountain(webElement));
-        }
-        log.info("Table list set");
-        return this;
     }
 
     public TablesPage printMountain() {
@@ -47,8 +30,8 @@ public class TablesPage extends BasePage {
     }
 
     public TablesPage setMountainByFilter(String country, int height) {
-        filteredList = listMountain.stream().filter(mountain -> mountain.getState().contains(country))
-                .filter(mountain -> mountain.getHeight() > height)
+        filteredList = allPeaksList.stream().filter(rowPage -> rowPage.getState().contains(country))
+                .filter(rowPage -> rowPage.getHeight() > height)
                 .collect(Collectors.toList());
         log.info("Mountain list filtered");
         return this;
@@ -56,5 +39,12 @@ public class TablesPage extends BasePage {
 
     public int getFilteredListSize() {
         return filteredList.size();
+    }
+
+    public TablesPage setAllPeaksList() {
+        for (WebElement peak : mountainsTable) {
+            allPeaksList.add(new RowPage(driver, peak));
+        }
+        return this;
     }
 }
