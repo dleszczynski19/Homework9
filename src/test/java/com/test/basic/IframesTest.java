@@ -22,12 +22,12 @@ public class IframesTest extends TestBase {
 
         driver.get("https://seleniumui.moderntester.pl/iframes.php");
         iframePage
-                .switchToFirstIframe()
+                .switchToShortFormIframe()
                 .fillFirstName(name)
                 .fillSurname(surname)
                 .switchToDefaultIframe();
         iframePage
-                .switchToSecondIframe()
+                .switchToExtendFormIframe()
                 .fillLogin(login)
                 .fillPassword(pass)
                 .chooseContinent(continent)
@@ -35,7 +35,7 @@ public class IframesTest extends TestBase {
                 .switchToDefaultIframe();
         iframePage
                 .navigateToBasic()
-                .switchToFirstIframe()
+                .switchToShortFormIframe()
                 .signIn();
         assertThat("Input should be empty", iframePage.getFirstNameValue().isEmpty());
         log.info(passed, passedMessage);

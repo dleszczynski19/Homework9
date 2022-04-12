@@ -39,12 +39,12 @@ public class IframePage extends IframeHelper {
         formPage = new FormPage(driver);
     }
 
-    public IframePage switchToFirstIframe() {
+    public IframePage switchToShortFormIframe() {
         switchToIframe("iframe1");
         return this;
     }
 
-    public IframePage switchToSecondIframe() {
+    public IframePage switchToExtendFormIframe() {
         switchToIframe("iframe2");
         return this;
     }

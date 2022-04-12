@@ -9,14 +9,15 @@ import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.moderntester.pages.configuration.BasePage;
+import pl.moderntester.pages.configuration.FileHandler;
 import pl.moderntester.pages.configuration.WebElementHelper;
 
-import java.io.File;
 import java.util.List;
 import java.util.Locale;
 
 public class FormPage extends WebElementHelper {
     private static Logger log = LoggerFactory.getLogger(FormPage.class);
+    private FileHandler fileHandler;
 
     @FindBy(css = "#inputFirstName3")
     private WebElement firstNameInput;
@@ -92,6 +93,7 @@ public class FormPage extends WebElementHelper {
 
     public FormPage(WebDriver driver) {
         super(driver);
+        fileHandler = new FileHandler(driver);
     }
 
     public FormPage fillFirstName(String name) {
@@ -179,9 +181,7 @@ public class FormPage extends WebElementHelper {
     }
 
     public FormPage sendFile(String filePath) {
-        File file = new File(filePath);
-        chooseFileInput.sendKeys(file.getAbsolutePath());
-        log.info("File send");
+        fileHandler.sendFile(chooseFileInput, filePath);
         return this;
     }
 

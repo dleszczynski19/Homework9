@@ -1,6 +1,7 @@
 package pl.moderntester.pages.configuration;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.slf4j.Logger;
@@ -15,6 +16,10 @@ import java.util.Objects;
 public class FileHandler extends BasePage {
     private static Logger log = LoggerFactory.getLogger(FileHandler.class);
     public String defaultDirectoryPath;
+
+    public FileHandler(WebDriver driver) {
+        super(driver);
+    }
 
     public FileHandler(WebDriver driver, String defaultDirectoryPath) {
         super(driver);
@@ -60,5 +65,11 @@ public class FileHandler extends BasePage {
             }
         }
         log.info("File downloaded");
+    }
+
+    public void sendFile(WebElement element, String filePath){
+        File file = new File(filePath);
+        element.sendKeys(file.getAbsolutePath());
+        log.info("File send");
     }
 }
